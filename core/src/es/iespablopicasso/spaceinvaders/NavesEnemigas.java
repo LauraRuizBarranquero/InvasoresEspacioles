@@ -46,36 +46,41 @@ public class NavesEnemigas extends NaveEspacial {
 
     public NavesEnemigas(float nuevaPosX,float nuevaPosY) {
 
+        nuevaPosX= this.posX;
+        nuevaPosY= this.posY;
     }
 
 
     //Resto de comportamiento
 
     //vamos a movernos automático
+
     public void moverseauto() {
 
+        if(iPasos <= MAX_PASOS){
+            iPasos++;
+        }else{
+
+            posY = posY - VELOCIDAD_INICIAL_Y;
+            iPasos = 0;
+        }
 
     }
 
     //Con estos dos movimientos, las naves no son independientes, se dejan "ordenar" por su escuadrón
     //orden de movimiento horizontal
+
     public void desplazarnos(boolean bDerecha) {
 
-
+        posX+=VELOCIDAD_INICIAL_X;
     }
 
+
     //orden de movimiento vertical
+
     public void avanzar() {
 
-        for (iPasos <= MAX_PASOS)
-        {
-            iPasos++;
-        }
-            if (iPasos == MAX_PASOS)
-            {
-                posY = posY - 100;
-                iPasos = 0;
-            }
+        posY+=VELOCIDAD_INICIAL_Y;
 
     }
 
@@ -84,11 +89,41 @@ public class NavesEnemigas extends NaveEspacial {
     @Override
     public void pintarse(SpriteBatch miSB) {
 
+        Texture temporal = img;
+
+        float tempo = 0;
+
+        if (tempo <= TASA_CAMBIO_SPRITE) {
+
+            temporal = img;
+            miSB.begin();
+            miSB.draw(temporal, posX, posY);
+            miSB.end();
+            tempo++;
+
+        } else {
+
+            temporal = img2;
+            miSB.begin();
+            miSB.draw(temporal, posX, posY);
+            miSB.end();
+            tempo = 0;
+
+        }
     }
+
+
+
 
     //Sobreescribimos dispose para eliminar nuestro segundo sprite/texture
     @Override
-    public void dispose() {
+    public void dispose(){
+        if (img != null){
+            img.dispose();
+        } else if (img2 != null){
+            img2.dispose();
+        }
+
 
     }
 
