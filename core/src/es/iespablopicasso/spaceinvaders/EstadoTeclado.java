@@ -66,23 +66,26 @@ public class EstadoTeclado {
     //nos han pulsado la pantalla en posX,posY. Simulamos el equivalente en teclas
     public void simulaTeclado(int posX, int posY) {
 
+
         if (posY > limiteAlturaZonaArriba){
             teclaArriba = true;
-        }
-        else if (posX <= limiteAnchoZonaLateral){
-            teclaAbajo = false;
-            teclaDer = false;
-            teclaIzq = true;
-        }
-        else if (posX <= ancho - limiteAnchoZonaLateral){
-            teclaAbajo = true;
-            teclaDer = true;
-            teclaIzq = false;
-        }
-        else {
-            teclaAbajo = true;
-        }
 
+        }else if (0 <= posX && posX <= limiteAnchoZonaLateral){
+
+            teclaDer = false;
+            teclaAbajo = false;
+            teclaIzq = true;
+
+        }else if (posX >= ancho - limiteAnchoZonaLateral && posX <= ancho){
+
+            teclaDer = true;
+            teclaAbajo = false;
+            teclaIzq = false;
+
+        }else{
+
+            teclaAbajo = true;
+        }
 
     }
 
