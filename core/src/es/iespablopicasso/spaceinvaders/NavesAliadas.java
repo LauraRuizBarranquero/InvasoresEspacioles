@@ -33,9 +33,13 @@ public class NavesAliadas extends NaveEspacial {
     //CONSTRUCTORES
     public NavesAliadas() {
 
+        super();
     }
 
     public NavesAliadas(float nuevaPosX,float nuevaPosY, short anchoPantalla) {
+
+        super(nuevaPosX,nuevaPosY,VELOCIDAD_INICIAL_X,VELOCIDAD_INICIAL_Y,NOMBRE_SPRITE,NOMBRE_SPRITE_EXP);
+        anchoPant = anchoPantalla;
 
     }
 
@@ -43,6 +47,24 @@ public class NavesAliadas extends NaveEspacial {
     //Resto de comportamiento
     public void moverse(EstadoTeclado et) {
 
+        if (et.isTeclaAbajo()) {
 
+            // Añadimos el super disparo
+
+        }else if (et.isTeclaArriba()){
+
+            // Añadimos disparo
+
+        }else if (et.isTeclaDer()){
+
+            // Controlamos si llega al max??
+            posX += VELOCIDAD_INICIAL_X;
+
+        }else if (et.isTeclaIzq()){
+
+            // Comprolamos si llegamos al min??
+            posX -= VELOCIDAD_INICIAL_X;
+
+        }
     }
 }
