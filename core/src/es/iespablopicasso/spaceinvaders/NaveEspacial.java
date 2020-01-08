@@ -37,9 +37,14 @@ public class NaveEspacial extends ObjetoVolador {
     //CONSTRUCTORES
     public NaveEspacial() {
 
+        super();
+        imgExplosion=null;
     }
 
     public NaveEspacial(float nuevaPosX,float nuevaPosY,float nuevaVelX, float nuevaVelY,String nombreImg,String explosionString) {
+
+        super(nuevaPosX,nuevaPosY,nuevaVelX,nuevaVelY,nombreImg);
+        imgExplosion = new Texture(explosionString);
 
     }
 
@@ -49,6 +54,13 @@ public class NaveEspacial extends ObjetoVolador {
     @Override
     public void pintarse(SpriteBatch miSB) {
 
+        if (explotar==true){
+            miSB.begin();
+            miSB.draw(imgExplosion,super.posX-super.anchoDiv2,super.posY-super.anchoDiv2);
+            miSB.end();
+        }else{
+            super.pintarse(miSB);
+        }
     }
 
     //Modificamos el método de liberación de recursos para que tenga en cuenta la nueva
@@ -56,9 +68,17 @@ public class NaveEspacial extends ObjetoVolador {
     @Override
     public void dispose() {
 
+        img.dispose();
     }
 
-    public void explota() {
+    public void explota(ObjetoVolador nave) {
 
+        boolean resultado = false;
+
+        if (super.colisiona(nave)) {
+            resultado = true;
+        } else {
+            resultado = false;
+        }
     }
 }
